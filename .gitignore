@@ -1,0 +1,9 @@
+.DS_Store
+.editorconfig
+.vscode
+__pycache__
+docker-compose.yaml
+docker-compose.yml
+.idea
+.vimrc
+.env
