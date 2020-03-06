@@ -12,7 +12,10 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "debug")  # log level
 APP_KEY = os.getenv("APP_KEY", "")  # application key
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # application root path
 
-CORS_ENABLE = (
-    True if os.getenv("NGNIX_ENABLE", "false").lower() == "true" else False
+CORS_ENABLED = (
+    True if os.getenv("CORS_ENABLED", "false").lower() == "true" else False
 )  # nginx
 
+WTF_CSRF_ENABLED = True if os.getenv("WTF_CSRF_ENABLED", "true").lower() == "true" else False
+
+WTF_CSRF_SECRET_KEY = APP_KEY

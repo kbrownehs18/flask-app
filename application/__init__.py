@@ -2,8 +2,7 @@
 # coding: utf-8
 
 from flask import Flask
-import traceback
-from utils4py.flask_utils import CustomJSONEncoder, response
+from utils4py.flask_utils import CustomJSONEncoder
 from flask_cors import CORS
 from .common import db, cache
 
@@ -15,7 +14,7 @@ app.config.from_object("config")
 app.config.from_pyfile("db.py", silent=True)
 app.config.from_pyfile("redis.py", silent=True)
 
-if app.config["CORS_ENABLE"]:
+if app.config["CORS_ENABLED"]:
     CORS(app)
 
 app.json_encoder = CustomJSONEncoder

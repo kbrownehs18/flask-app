@@ -3,4 +3,4 @@
 
 import os
 
-REDIS_URL = os.getenv("APP_NAME", "redis://:password@localhost:6379/0")
+REDIS_URL = os.getenv("REDIS_URL", "redis://:password@localhost:6379/0")
