@@ -2,7 +2,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/last911/openresty-python3.7
 WORKDIR /data/wwwroot
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+RUN pip install --upgrade -r requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 
 COPY ["www.conf", "/etc/openresty/vhosts/"]
 COPY ["run.sh", "/usr/bin"]

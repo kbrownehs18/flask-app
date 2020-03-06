@@ -16,6 +16,6 @@ CORS_ENABLED = (
     True if os.getenv("CORS_ENABLED", "false").lower() == "true" else False
 )  # nginx
 
-WTF_CSRF_ENABLED = True if os.getenv("WTF_CSRF_ENABLED", "true").lower() == "true" else False
+WTF_CSRF_ENABLED = True if os.getenv("WTF_CSRF_ENABLED", "false").lower() == "true" else False
 
 WTF_CSRF_SECRET_KEY = APP_KEY
