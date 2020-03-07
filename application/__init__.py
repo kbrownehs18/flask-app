@@ -19,6 +19,7 @@ if app.config["CORS_ENABLED"]:
 
 app.json_encoder = CustomJSONEncoder
 
+import middleware
 
 @app.teardown_request
 def teardown_request(e):
