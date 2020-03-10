@@ -23,8 +23,17 @@ from . import middleware
 
 
 @app.teardown_request
-def teardown_request(e):
-    db.session.close()
+def teardown_request(exception):
+    try:
+        if exception:
+            app.logger.error(exception)
+            db.session.rollback()
+        else:
+            db.session.commit()
+    except:
+        db.session.rollback()
+    finally:
+        db.session.close()
 
 
 def init_app():
