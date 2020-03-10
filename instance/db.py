@@ -9,7 +9,7 @@ SQLALCHEMY_DATABASE_URI = os.getenv(
 )
 SQLALCHEMY_TRACK_MODIFICATIONS = (
     True
-    if os.getenv("SQLALCHEMY_COMMIT_ON_TEARDOWN", "true").lower() == "true"
+    if os.getenv("SQLALCHEMY_COMMIT_ON_TEARDOWN", "false").lower() == "true"
     else False
 )
 SQLALCHEMY_ECHO = (
