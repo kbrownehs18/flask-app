@@ -5,6 +5,7 @@ from flask import Flask
 from utils4py.flask_utils import CustomJSONEncoder
 from flask_cors import CORS
 from .common import db, cache
+from .middleware.error_handler import error_response
 
 app = Flask(
     __name__, instance_relative_config=True, static_folder="public", static_url_path=""
@@ -13,6 +14,7 @@ app = Flask(
 app.config.from_object("config")
 app.config.from_pyfile("db.py", silent=True)
 app.config.from_pyfile("redis.py", silent=True)
+app.config.from_pyfile("app.py", silent=True)
 
 if app.config["CORS_ENABLED"]:
     CORS(app)
@@ -22,16 +24,20 @@ app.json_encoder = CustomJSONEncoder
 from . import middleware
 
 
-@app.teardown_request
-def teardown_request(exception):
-    try:
-        if exception:
-            app.logger.error(exception)
-            db.session.rollback()
-        else:
-            db.session.commit()
-    except:
+@app.errorhandler(Exception)
+def error_handler(error):
+    g._error = error
+    if error:
         db.session.rollback()
+
+    return error_response(error)
+
+
+@app.teardown_request
+def teardown_request(error):
+    try:
+        if not hasattr(g, "_error") or not g._error:
+            db.session.commit()
     finally:
         db.session.close()
 
