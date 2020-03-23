@@ -5,7 +5,7 @@ from flask import Flask
 from utils4py.flask_utils import CustomJSONEncoder
 from flask_cors import CORS
 from .common import db, cache
-from .middleware.error_handler import error_response
+from .error.error_handler import error_response
 
 app = Flask(
     __name__, instance_relative_config=True, static_folder="public", static_url_path=""
