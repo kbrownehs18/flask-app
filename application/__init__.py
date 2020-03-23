@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from flask import Flask
+from flask import Flask, g
 from utils4py.flask_utils import CustomJSONEncoder
 from flask_cors import CORS
 from .common import db, cache
