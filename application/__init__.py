@@ -46,7 +46,7 @@ def init_app():
     """
     initialize app
     """
-    cache.init_app(app)
+    cache.init_app(app, decode_responses=True)
     db.init_app(app)
 
 
