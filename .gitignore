@@ -7,3 +7,4 @@ docker-compose.yml
 .idea
 .vimrc
 .env
+make_models.sh
