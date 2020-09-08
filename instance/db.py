@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import os
+from sqlalchemy.pool import QueuePool
 
 SQLALCHEMY_DATABASE_URI = os.getenv(
     "SQLALCHEMY_DATABASE_URI",
@@ -17,10 +18,12 @@ SQLALCHEMY_ECHO = (
 )
 
 SQLALCHEMY_ENGINE_OPTIONS = {
-    "pool_recycle": int(os.getenv("SQLALCHEMY_POOL_RECYCLE", 5)),
-    "pool_timeout": int(os.getenv("SQLALCHEMY_POOL_TIMEOUT", 5)),
+    "poolclass": QueuePool,
     "pool_size": int(os.getenv("SQLALCHEMY_POOL_SIZE", 10)),
     "pool_pre_ping": True
     if os.getenv("SQLALCHEMY_POOL_PRE_PING", "true").lower() == "true"
     else False,
+    "pool_recycle": int(os.getenv("SQLALCHEMY_POOL_RECYCLE", 5)),
+    "pool_timeout": int(os.getenv("SQLALCHEMY_POOL_TIMEOUT", 5)),
 }
+
