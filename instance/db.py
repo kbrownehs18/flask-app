@@ -15,5 +15,12 @@ SQLALCHEMY_TRACK_MODIFICATIONS = (
 SQLALCHEMY_ECHO = (
     True if os.getenv("SQLALCHEMY_ECHO", "true").lower() == "true" else False
 )
-SQLALCHEMY_POOL_RECYCLE = int(os.getenv("SQLALCHEMY_POOL_RECYCLE", 3600))
-SQLALCHEMY_POOL_SIZE = int(os.getenv("SQLALCHEMY_POOL_SIZE", 10))
+
+SQLALCHEMY_ENGINE_OPTIONS = {
+    "pool_recycle": int(os.getenv("SQLALCHEMY_POOL_RECYCLE", 5)),
+    "pool_timeout": int(os.getenv("SQLALCHEMY_POOL_TIMEOUT", 5)),
+    "pool_size": int(os.getenv("SQLALCHEMY_POOL_SIZE", 10)),
+    "pool_pre_ping": True
+    if os.getenv("SQLALCHEMY_POOL_PRE_PING", "true").lower() == "true"
+    else False,
+}
