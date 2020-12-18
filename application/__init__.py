@@ -27,8 +27,6 @@ from . import middleware
 @app.errorhandler(Exception)
 def error_handler(error):
     g._error = error
-    if error:
-        db.session.rollback()
 
     return error_response(error)
 
@@ -36,9 +34,11 @@ def error_handler(error):
 @app.teardown_request
 def teardown_request(error):
     try:
-        if not hasattr(g, "_error") or not g._error:
+        if hasattr(g, "_error") and g._error:
+            db.session.rollback()
+        else:
             db.session.commit()
-    finally:
+    except:
         db.session.close()
 
 
