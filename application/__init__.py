@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import traceback
 from flask import Flask, g
 from utils4py.flask_utils import CustomJSONEncoder
 from flask_cors import CORS
@@ -27,20 +26,20 @@ from . import middleware
 
 @app.errorhandler(Exception)
 def error_handler(error):
-    try:
-        if error:
-            db.session.rollback()
-        else:
-            db.session.commit()
-    except:
-        traceback.print_exc()
+    g._error = error
 
     return error_response(error)
 
 
 @app.teardown_request
 def teardown_request(error):
-    pass
+    try:
+        if hasattr(g, "_error") and g._error:
+            db.session.rollback()
+        else:
+            db.session.commit()
+    except:
+        db.session.remove()
 
 
 def init_app():
